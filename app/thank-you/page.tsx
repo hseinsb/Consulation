@@ -29,9 +29,8 @@ export default function ThankYou() {
   }
 
   const handleDownloadGuide = () => {
-    // Replace with your actual PDF URL
-    // For now, this opens a placeholder
-    window.open('/guide.pdf', '_blank')
+    // Open your Google Drive PDF directly
+    window.open('https://drive.google.com/file/d/145QE7-SWB5hGyDEOQTCkuKPHWx-M5ww6/view?usp=sharing', '_blank')
   }
 
   return (
