@@ -42,7 +42,9 @@ export default function Home() {
         {/* Header Section */}
         <div className="mb-12 space-y-6">
           <h1 className="text-4xl md:text-6xl font-light tracking-wide text-gray-900 leading-tight text-shadow-soft">
-            You Weren't Sent Here by Accident.
+            You're Not Lost — You're Being Redirected.
+            <br />
+            This guide is your next sign.
           </h1>
           <p className="text-lg md:text-xl font-light text-gray-700 max-w-xl mx-auto">
             But before you open the guide… I need to show you what this moment really means.
