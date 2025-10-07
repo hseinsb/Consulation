@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-gray-800;
+  }
+}
+
+@layer utilities {
+  .text-shadow-soft {
+    text-shadow: 0 2px 10px rgba(214, 175, 75, 0.3);
+  }
+  
+  .glow-gold {
+    box-shadow: 0 0 40px rgba(214, 175, 75, 0.4);
+  }
+  
+  .glow-gold-soft {
+    box-shadow: 0 4px 20px rgba(214, 175, 75, 0.2);
+  }
+}
+
