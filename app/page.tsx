@@ -62,14 +62,14 @@ export default function Home() {
       <div className="relative z-10 w-full max-w-2xl mx-auto text-center animate-fade-in-up">
         {/* Header Section */}
         <div className="mb-12 space-y-6">
-          <h1 className="text-4xl md:text-6xl font-light tracking-wide text-gray-900 leading-tight text-shadow-soft">
-            You're Not Lost — You're Being Redirected.
-            <br />
-            This guide is your next sign.
-          </h1>
-          <p className="text-lg md:text-xl font-light text-gray-700 max-w-xl mx-auto">
-            Download Here For Free
-          </p>
+              <h1 className="text-4xl md:text-6xl font-medium tracking-wide text-gray-900 leading-tight text-shadow-soft">
+                You're Not Lost — You're Being Redirected.
+                <br />
+                This guide is your next sign.
+              </h1>
+              <p className="text-lg md:text-xl font-normal text-gray-700 max-w-xl mx-auto">
+                Download Here For Free
+              </p>
         </div>
 
         {/* Golden Card with Form */}
@@ -81,7 +81,7 @@ export default function Home() {
             <h2 className="text-2xl md:text-3xl font-medium text-gray-900 mb-3">
               Download the Free Divine Consultation Guide
             </h2>
-            <p className="text-gray-600 font-light">
+            <p className="text-gray-600 font-normal">
               Unlock your path to spiritual clarity and emotional healing
             </p>
           </div>

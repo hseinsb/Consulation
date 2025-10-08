@@ -80,10 +80,10 @@ export default function ThankYou() {
           <h1 className="text-4xl md:text-6xl font-light tracking-wide text-gray-900 leading-tight mb-6 text-shadow-soft">
             You Weren't Sent Here by Accident.
           </h1>
-          <p className="text-xl md:text-2xl font-light text-gray-700 mb-3">
+          <p className="text-xl md:text-2xl font-normal text-gray-700 mb-3">
             Your Divine Consultation Guide is ready below.
           </p>
-          <p className="text-lg md:text-xl font-light text-gold-dark">
+          <p className="text-lg md:text-xl font-normal text-gold-dark">
             But first… I need to show you what this really means.
           </p>
         </div>
@@ -139,7 +139,7 @@ export default function ThankYou() {
               </div>
             </div>
 
-            <p className="text-center text-gray-700 font-light text-lg leading-relaxed">
+            <p className="text-center text-gray-700 font-normal text-lg leading-relaxed">
               In this video, I explain why the free guide is just the beginning of your healing,
               and how a personal consultation can transform your spiritual and emotional life.
             </p>
@@ -197,9 +197,9 @@ export default function ThankYou() {
                   <div className="absolute -bottom-2 right-0 text-5xl text-gold-light/40 font-serif leading-none">"</div>
                 </blockquote>
                 
-                <p className="text-gray-500 text-sm font-light text-right pt-2">
-                  — A past client
-                </p>
+                  <p className="text-gray-500 text-sm font-normal text-right pt-2">
+                    — A past client
+                  </p>
 
                 <div className="pt-6 border-t border-gray-200 space-y-4">
                   <p className="text-gray-800 leading-relaxed font-medium">
@@ -214,7 +214,7 @@ export default function ThankYou() {
                     This isn't therapy. And it's not a lecture. It's a real conversation where we talk openly about what's been weighing on your heart.
                   </p>
 
-                  <p className="text-gray-600 font-light italic text-sm">
+                  <p className="text-gray-600 font-normal italic text-sm">
                     Every session is private. Every word is confidential. And every second is just for you.
                   </p>
                 </div>
@@ -247,7 +247,7 @@ export default function ThankYou() {
 
         {/* Section E - Footer */}
         <footer className="text-center py-12 border-t border-gold-light/20">
-          <p className="text-sm text-gray-500 font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
             © 2025 Divine Consultation. All rights reserved.<br />
             This is a spiritual guidance resource and does not replace professional therapy or medical advice.
           </p>
