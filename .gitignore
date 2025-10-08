@@ -32,8 +32,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Large video files
+# Large video files (MOV only - mp4 is smaller)
 public/*.MOV
-public/*.mp4
 public/*.mov
 

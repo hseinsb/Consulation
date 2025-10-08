@@ -109,8 +109,7 @@ export default function ThankYou() {
                       onPlay={() => setIsPlaying(true)}
                       onPause={() => setIsPlaying(false)}
                     >
-                      <source src="/IMG_9523.MOV" type="video/quicktime" />
-                      <source src="/IMG_9523.MOV" type="video/mp4" />
+                      <source src="/IMG_9523.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                     
