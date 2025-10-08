@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import CloudBackground from '@/components/CloudBackground'
 
 export default function Home() {
+  const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
@@ -13,23 +14,43 @@ export default function Home() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Here you would integrate with your email service (Zapier, Firebase, etc.)
-    // For now, we'll simulate an API call
     try {
-      // Example: await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) })
-      
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 800))
-      
-      // Store email in localStorage for potential use
+      // Store user data in localStorage
       if (typeof window !== 'undefined') {
+        localStorage.setItem('userFirstName', firstName)
         localStorage.setItem('userEmail', email)
       }
+
+      // Submit to our Next.js API route (which proxies to Google Apps Script)
+      // This avoids CORS issues since the API route is on the same domain
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firstName, email })
+      })
+
+      const result = await response.json()
       
+      console.log('📦 Full API Response:', result)
+      
+      if (result.success) {
+        console.log('✅ Successfully submitted to Google Sheets!')
+        console.log('📄 Script Response:', result.scriptResponse)
+      } else {
+        console.warn('⚠️ Submission may have failed, but data is in localStorage')
+        console.warn('Error details:', result)
+      }
+
       // Redirect to thank you page
       router.push('/thank-you')
+      
     } catch (error) {
-      console.error('Error submitting email:', error)
+      console.error('❌ Error submitting email:', error)
+      // Still redirect even if submission fails - data is in localStorage as backup
+      router.push('/thank-you')
+    } finally {
       setIsSubmitting(false)
     }
   }
@@ -47,7 +68,7 @@ export default function Home() {
             This guide is your next sign.
           </h1>
           <p className="text-lg md:text-xl font-light text-gray-700 max-w-xl mx-auto">
-            But before you open the guide… I need to show you what this moment really means.
+            Download Here For Free
           </p>
         </div>
 
@@ -66,7 +87,15 @@ export default function Home() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
+            <div className="space-y-4">
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Enter your first name"
+                required
+                className="w-full px-6 py-4 rounded-2xl border-2 border-gold-light/40 focus:border-gold focus:ring-4 focus:ring-gold/20 outline-none transition-all duration-300 text-lg bg-white/80 backdrop-blur-sm placeholder:text-gray-400"
+              />
               <input
                 type="email"
                 value={email}

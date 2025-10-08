@@ -1,17 +1,53 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Cal, { getCalApi } from "@calcom/embed-react"
 import CloudBackground from '@/components/CloudBackground'
 
 export default function ThankYou() {
   const [showVideo, setShowVideo] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     // Fade in video after component mounts
     const timer = setTimeout(() => setShowVideo(true), 300)
     return () => clearTimeout(timer)
   }, [])
+
+  const handlePlayClick = async () => {
+    if (videoRef.current) {
+      try {
+        await videoRef.current.play()
+        setIsPlaying(true)
+      } catch (error) {
+        console.error('Error playing video:', error)
+      }
+    }
+  }
+
+  // Auto-trigger play after video loads
+  useEffect(() => {
+    if (showVideo && videoRef.current) {
+      const video = videoRef.current
+      const tryAutoPlay = async () => {
+        try {
+          await video.play()
+          setIsPlaying(true)
+        } catch (error) {
+          // Autoplay blocked, user will need to click play button
+          console.log('Autoplay blocked, waiting for user interaction')
+        }
+      }
+      
+      // Wait for video to be ready
+      if (video.readyState >= 2) {
+        tryAutoPlay()
+      } else {
+        video.addEventListener('loadeddata', tryAutoPlay, { once: true })
+      }
+    }
+  }, [showVideo])
 
   useEffect(() => {
     (async function () {
@@ -59,22 +95,49 @@ export default function ThankYou() {
               A Personal Message for You
             </h2>
             
-            {/* Video Player */}
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl mb-8 bg-black/10">
-              {showVideo ? (
-                <iframe
-                  className="w-full h-full"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
-                  title="Divine Consultation Message"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="animate-pulse text-gold">Loading...</div>
-                </div>
-              )}
+            {/* Video Player - Vertical 9:16 Format */}
+            <div className="flex justify-center mb-8">
+              <div className="relative w-full max-w-[350px] rounded-2xl overflow-hidden shadow-2xl bg-black" style={{ aspectRatio: '9/16' }}>
+                {showVideo ? (
+                  <>
+                    <video
+                      ref={videoRef}
+                      className="w-full h-full object-cover"
+                      controls
+                      playsInline
+                      preload="auto"
+                      onPlay={() => setIsPlaying(true)}
+                      onPause={() => setIsPlaying(false)}
+                    >
+                      <source src="/IMG_9523.MOV" type="video/quicktime" />
+                      <source src="/IMG_9523.MOV" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    
+                    {/* Custom Play Button Overlay */}
+                    {!isPlaying && (
+                      <div 
+                        className="absolute inset-0 flex items-center justify-center bg-black/20 cursor-pointer group"
+                        onClick={handlePlayClick}
+                      >
+                        <div className="w-20 h-20 rounded-full bg-gold/90 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 glow-gold-soft">
+                          <svg 
+                            className="w-10 h-10 text-white ml-1" 
+                            fill="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="animate-pulse text-gold">Loading...</div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <p className="text-center text-gray-700 font-light text-lg leading-relaxed">
