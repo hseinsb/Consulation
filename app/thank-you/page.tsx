@@ -226,16 +226,16 @@ export default function ThankYou() {
                   Select Your Time
                 </h3>
                 
-                {/* Cal.com embed container */}
-                <div className="rounded-xl overflow-hidden border border-gold-light/30 mb-6" style={{ width: '100%', height: '600px', overflow: 'scroll' }}>
-                  <Cal 
-                    key={Date.now()} // Force refresh with cache-busting
-                    namespace="1-on-1-call-with-hussein"
-                    calLink="husseinsbeiti/1-on-1-call-with-hussein"
-                    style={{width:"100%",height:"100%",overflow:"scroll"}}
-                    config={{"layout":"month_view","theme":"light"}}
-                  />
-                </div>
+                      {/* Cal.com embed container */}
+                      <div className="rounded-xl overflow-hidden border border-gold-light/30 mb-6" style={{ width: '100%', height: '500px', overflow: 'auto' }}>
+                        <Cal
+                          key={Date.now()} // Force refresh with cache-busting
+                          namespace="1-on-1-call-with-hussein"
+                          calLink="husseinsbeiti/1-on-1-call-with-hussein"
+                          style={{width:"100%",height:"100%",overflow:"auto"}}
+                          config={{"layout":"month_view","theme":"light"}}
+                        />
+                      </div>
 
                 <p className="text-sm text-gray-500 text-center mt-4 italic">
                   This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.
