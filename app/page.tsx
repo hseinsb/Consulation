@@ -59,7 +59,7 @@ export default function Home() {
     <main className="relative min-h-screen flex items-center justify-center px-4 py-12 overflow-hidden">
       <CloudBackground />
       
-      <div className="relative z-10 w-full max-w-2xl mx-auto text-center animate-fade-in-up">
+      <div className="relative z-10 w-full max-w-2xl mx-auto text-center">
         {/* Header Section */}
         <div className="mb-12 space-y-6">
               <h1 className="text-4xl md:text-6xl font-medium tracking-wide text-gray-900 leading-tight text-shadow-soft">
@@ -73,7 +73,7 @@ export default function Home() {
         </div>
 
         {/* Golden Card with Form */}
-        <div className="bg-gradient-to-br from-white/90 to-gold-light/20 backdrop-blur-sm rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
+        <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
           <div className="mb-8">
             <div className="inline-block px-6 py-2 bg-gradient-to-r from-gold to-gold-light rounded-full mb-6">
               <span className="text-white font-medium text-sm tracking-wider uppercase">Free Divine Guide</span>
@@ -94,7 +94,7 @@ export default function Home() {
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Enter your first name"
                 required
-                className="w-full px-6 py-4 rounded-2xl border-2 border-gold-light/40 focus:border-gold focus:ring-4 focus:ring-gold/20 outline-none transition-all duration-300 text-lg bg-white/80 backdrop-blur-sm placeholder:text-gray-400"
+                className="w-full px-6 py-4 rounded-2xl border-2 border-gold-light/40 focus:border-gold focus:ring-4 focus:ring-gold/20 outline-none transition-all duration-300 text-lg bg-white placeholder:text-gray-400"
               />
               <input
                 type="email"
@@ -102,7 +102,7 @@ export default function Home() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
                 required
-                className="w-full px-6 py-4 rounded-2xl border-2 border-gold-light/40 focus:border-gold focus:ring-4 focus:ring-gold/20 outline-none transition-all duration-300 text-lg bg-white/80 backdrop-blur-sm placeholder:text-gray-400"
+                className="w-full px-6 py-4 rounded-2xl border-2 border-gold-light/40 focus:border-gold focus:ring-4 focus:ring-gold/20 outline-none transition-all duration-300 text-lg bg-white placeholder:text-gray-400"
               />
             </div>
 

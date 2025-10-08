@@ -76,7 +76,7 @@ export default function ThankYou() {
       <div className="relative z-10 max-w-6xl mx-auto">
         
         {/* Section A - Header */}
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-light tracking-wide text-gray-900 leading-tight mb-6 text-shadow-soft">
             You Weren't Sent Here by Accident.
           </h1>
@@ -89,8 +89,8 @@ export default function ThankYou() {
         </div>
 
         {/* Section B - Golden Video Card */}
-        <div className="max-w-4xl mx-auto mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          <div className="bg-gradient-to-br from-white/90 to-gold-light/20 backdrop-blur-sm rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
             <h2 className="text-3xl md:text-4xl font-medium text-gray-900 text-center mb-8">
               A Personal Message for You
             </h2>
@@ -147,7 +147,7 @@ export default function ThankYou() {
         </div>
 
         {/* Section C - CTA Buttons */}
-        <div className="max-w-2xl mx-auto mb-20 space-y-6 text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+        <div className="max-w-2xl mx-auto mb-20 space-y-6 text-center">
           <button
             onClick={scrollToBooking}
             className="w-full md:w-auto bg-gradient-to-r from-gold to-gold-light text-white font-medium text-xl px-12 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 glow-gold-soft"
@@ -166,7 +166,7 @@ export default function ThankYou() {
         </div>
 
         {/* Section D - Booking Section */}
-        <div id="booking-section" className="scroll-mt-20 max-w-6xl mx-auto mb-16 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+        <div id="booking-section" className="scroll-mt-20 max-w-6xl mx-auto mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-3">
               What It Felt Like to Talk to Me One-on-One
@@ -176,7 +176,7 @@ export default function ThankYou() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-white/90 to-gold-light/20 backdrop-blur-sm rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
+          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               
               {/* Left side - Testimonial */}
