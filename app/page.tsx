@@ -63,7 +63,7 @@ export default function Home() {
         {/* Header Section */}
         <div className="mb-12 space-y-6">
               <h1 className="text-4xl md:text-6xl font-medium tracking-wide text-gray-900 leading-tight text-shadow-soft">
-                You're Not Lost — You're Being Redirected.
+                You're Not Lost You're Being Redirected.
                 <br />
                 This guide is your next sign.
               </h1>
