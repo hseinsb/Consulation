@@ -263,11 +263,11 @@ export default function ThankYou() {
             Select Your Time
           </h3>
           
-          {/* Cal.com inline embed - no nested boxes, full width */}
+          {/* Cal.com inline embed - no nested boxes, full width, auto-expand */}
           <div 
             id="my-cal-inline-1-on-1-call-with-hussein"
             className="rounded-2xl shadow-2xl w-full bg-white" 
-            style={{ width: '100%', minHeight: '700px' }}
+            style={{ width: '100%', minHeight: '700px', height: 'auto' }}
           ></div>
 
           <p className="text-sm text-gray-500 text-center mt-8 italic">

@@ -31,12 +31,28 @@
   #my-cal-inline-1-on-1-call-with-hussein {
     position: relative;
     overflow: visible !important;
+    height: auto !important;
   }
   
   #my-cal-inline-1-on-1-call-with-hussein iframe {
     border: none !important;
     overflow: visible !important;
     min-height: 700px !important;
+    height: auto !important;
+  }
+
+  /* Ensure Cal.com modals and booking forms are not restricted */
+  #my-cal-inline-1-on-1-call-with-hussein * {
+    overflow: visible !important;
+  }
+
+  /* Force booking form container to expand */
+  [data-testid="booking-form"],
+  [data-cal-namespace] [role="dialog"],
+  [data-cal-namespace] form {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
   }
 }
 
