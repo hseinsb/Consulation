@@ -263,16 +263,15 @@ export default function ThankYou() {
             Select Your Time
           </h3>
           
-          {/* Cal.com inline embed - clean desktop design, no extra white box */}
+          {/* Cal.com inline embed - minimal styling, let Cal.com handle design */}
           <div 
             id="my-cal-inline-1-on-1-call-with-hussein"
-            className="rounded-2xl shadow-2xl w-full mx-auto overflow-hidden" 
+            className="w-full mx-auto" 
             style={{ 
               width: '100%', 
               maxWidth: '1100px',
               minHeight: '700px', 
-              height: 'auto',
-              background: 'transparent'
+              height: 'auto'
             }}
           ></div>
 

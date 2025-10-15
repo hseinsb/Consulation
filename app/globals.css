@@ -32,6 +32,7 @@
     position: relative;
     overflow: visible !important;
     height: auto !important;
+    background: transparent !important;
   }
   
   #my-cal-inline-1-on-1-call-with-hussein iframe {
@@ -39,6 +40,8 @@
     overflow: visible !important;
     min-height: 700px !important;
     height: auto !important;
+    width: 100% !important;
+    display: block !important;
   }
 
   /* Ensure Cal.com modals and booking forms are not restricted */
@@ -53,6 +56,13 @@
     overflow: visible !important;
     max-height: none !important;
     height: auto !important;
+  }
+
+  /* Desktop-specific fixes - remove extra padding/margins inside Cal.com */
+  @media (min-width: 768px) {
+    #my-cal-inline-1-on-1-call-with-hussein iframe {
+      min-height: 800px !important;
+    }
   }
 }
 
