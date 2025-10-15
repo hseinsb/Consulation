@@ -258,19 +258,24 @@ export default function ThankYou() {
         </div>
 
         {/* Section E - Calendar Section (Separate, Full Width) */}
-        <div className="max-w-5xl mx-auto mb-16 px-4">
+        <div className="max-w-6xl mx-auto mb-16 px-4">
           <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-8 text-center">
             Select Your Time
           </h3>
           
-          {/* Cal.com inline embed - no nested boxes, full width, auto-expand */}
+          {/* Cal.com inline embed - optimized for both mobile and desktop */}
           <div 
             id="my-cal-inline-1-on-1-call-with-hussein"
-            className="rounded-2xl shadow-2xl w-full bg-white" 
-            style={{ width: '100%', minHeight: '700px', height: 'auto' }}
+            className="rounded-2xl shadow-2xl w-full bg-white mx-auto" 
+            style={{ 
+              width: '100%', 
+              maxWidth: '1100px',
+              minHeight: '700px', 
+              height: 'auto' 
+            }}
           ></div>
 
-          <p className="text-sm text-gray-500 text-center mt-8 italic">
+          <p className="text-sm text-gray-500 text-center mt-8 italic max-w-2xl mx-auto">
             This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.
           </p>
         </div>
