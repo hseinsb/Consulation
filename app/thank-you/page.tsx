@@ -205,8 +205,8 @@ export default function ThankYou() {
           </div>
         </div>
 
-        {/* Section D - Booking Section */}
-        <div id="booking-section" className="scroll-mt-20 max-w-7xl mx-auto mb-16">
+        {/* Section D - Testimonial Section */}
+        <div id="booking-section" className="scroll-mt-20 max-w-4xl mx-auto mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-3">
               What It Felt Like to Talk to Me One-on-One
@@ -216,69 +216,63 @@ export default function ThankYou() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft p-6 md:p-10 border border-gold-light/30">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-start">
-              
-              {/* Left side - Testimonial */}
-              <div className="space-y-5">
-                <blockquote className="relative">
-                  <div className="absolute -top-2 -left-2 text-5xl text-gold-light/40 font-serif leading-none">"</div>
-                  <div className="relative pl-4">
-                    <p className="text-gray-700 leading-relaxed mb-4 italic">
-                      Your videos. Your content. Your attempt at helping people understand some difficult or controversial subjects in a positive way. Felt like I can approach you with a difficult subject matter and you can somehow take it apart and simplify it. You are also convincing — so whatever I felt I needed help with, I felt you could convince me of the right way.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed mb-4 italic">
-                      What's more is that most people came really hard on me when I sought their advice. You were straightforward, but also so careful as to not break me or hurt me. I felt for the whole day and day after like I could lean on you — rest my head on your shoulder safely.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed italic">
-                      Thank you for it all.
-                    </p>
-                  </div>
-                  <div className="absolute -bottom-2 right-0 text-5xl text-gold-light/40 font-serif leading-none">"</div>
-                </blockquote>
-                
-                  <p className="text-gray-500 text-sm font-normal text-right pt-2">
-                    — A past client
-                  </p>
-
-                <div className="pt-6 border-t border-gray-200 space-y-4">
-                  <p className="text-gray-800 leading-relaxed font-medium">
-                    This is a private one-on-one call with me — just you and me.
-                  </p>
-
-                  <p className="text-gray-700 leading-relaxed">
-                    If you're feeling lost, overwhelmed, heartbroken, or disconnected from God — you're not alone.
-                  </p>
-
-                  <p className="text-gray-700 leading-relaxed">
-                    This isn't therapy. And it's not a lecture. It's a real conversation where we talk openly about what's been weighing on your heart.
-                  </p>
-
-                  <p className="text-gray-600 font-normal italic text-sm">
-                    Every session is private. Every word is confidential. And every second is just for you.
-                  </p>
-                </div>
-              </div>
-
-              {/* Right side - Calendar */}
-              <div className="w-full">
-                <h3 className="text-2xl font-medium text-gray-900 mb-6 text-center">
-                  Select Your Time
-                </h3>
-                
-                      {/* Cal.com inline embed - mobile friendly, no scroll restrictions */}
-                      <div 
-                        id="my-cal-inline-1-on-1-call-with-hussein"
-                        className="rounded-2xl shadow-lg w-full bg-white" 
-                        style={{ width: '100%', minHeight: '700px' }}
-                      ></div>
-
-                <p className="text-sm text-gray-500 text-center mt-6 italic">
-                  This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.
+          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
+            <blockquote className="relative mb-6">
+              <div className="absolute -top-2 -left-2 text-5xl text-gold-light/40 font-serif leading-none">"</div>
+              <div className="relative pl-4">
+                <p className="text-gray-700 leading-relaxed mb-4 italic">
+                  Your videos. Your content. Your attempt at helping people understand some difficult or controversial subjects in a positive way. Felt like I can approach you with a difficult subject matter and you can somehow take it apart and simplify it. You are also convincing — so whatever I felt I needed help with, I felt you could convince me of the right way.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-4 italic">
+                  What's more is that most people came really hard on me when I sought their advice. You were straightforward, but also so careful as to not break me or hurt me. I felt for the whole day and day after like I could lean on you — rest my head on your shoulder safely.
+                </p>
+                <p className="text-gray-700 leading-relaxed italic">
+                  Thank you for it all.
                 </p>
               </div>
+              <div className="absolute -bottom-2 right-0 text-5xl text-gold-light/40 font-serif leading-none">"</div>
+            </blockquote>
+            
+            <p className="text-gray-500 text-sm font-normal text-right mb-6">
+              — A past client
+            </p>
+
+            <div className="pt-6 border-t border-gray-200 space-y-4">
+              <p className="text-gray-800 leading-relaxed font-medium">
+                This is a private one-on-one call with me — just you and me.
+              </p>
+
+              <p className="text-gray-700 leading-relaxed">
+                If you're feeling lost, overwhelmed, heartbroken, or disconnected from God — you're not alone.
+              </p>
+
+              <p className="text-gray-700 leading-relaxed">
+                This isn't therapy. And it's not a lecture. It's a real conversation where we talk openly about what's been weighing on your heart.
+              </p>
+
+              <p className="text-gray-600 font-normal italic text-sm">
+                Every session is private. Every word is confidential. And every second is just for you.
+              </p>
             </div>
           </div>
+        </div>
+
+        {/* Section E - Calendar Section (Separate, Full Width) */}
+        <div className="max-w-5xl mx-auto mb-16 px-4">
+          <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-8 text-center">
+            Select Your Time
+          </h3>
+          
+          {/* Cal.com inline embed - no nested boxes, full width */}
+          <div 
+            id="my-cal-inline-1-on-1-call-with-hussein"
+            className="rounded-2xl shadow-2xl w-full bg-white" 
+            style={{ width: '100%', minHeight: '700px' }}
+          ></div>
+
+          <p className="text-sm text-gray-500 text-center mt-8 italic">
+            This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.
+          </p>
         </div>
 
         {/* Section E - Footer */}
