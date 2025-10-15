@@ -3,6 +3,13 @@
 import { useState, useEffect, useRef } from 'react'
 import CloudBackground from '@/components/CloudBackground'
 
+// Declare Cal on window for TypeScript
+declare global {
+  interface Window {
+    Cal: any;
+  }
+}
+
 export default function ThankYou() {
   const [showVideo, setShowVideo] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -49,18 +56,44 @@ export default function ThankYou() {
   }, [showVideo])
 
   useEffect(() => {
-    // Load Calendly widget script
-    const script = document.createElement('script')
-    script.src = 'https://assets.calendly.com/assets/external/widget.js'
-    script.async = true
-    document.body.appendChild(script)
+    // Load Cal.com embed script
+    (function (C: any, A: string, L: string) { 
+      let p = function (a: any, ar: any) { a.q.push(ar); }; 
+      let d = C.document; 
+      C.Cal = C.Cal || function () { 
+        let cal = C.Cal; 
+        let ar = arguments; 
+        if (!cal.loaded) { 
+          cal.ns = {}; 
+          cal.q = cal.q || []; 
+          d.head.appendChild(d.createElement("script")).src = A; 
+          cal.loaded = true; 
+        } 
+        if (ar[0] === L) { 
+          const api = function () { p(api, arguments); }; 
+          const namespace = ar[1]; 
+          api.q = api.q || []; 
+          if(typeof namespace === "string"){
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar); 
+          return;
+        } 
+        p(cal, ar); 
+      }; 
+    })(window, "https://app.cal.com/embed/embed.js", "init");
 
-    return () => {
-      // Cleanup script on unmount
-      if (script.parentNode) {
-        script.parentNode.removeChild(script)
-      }
-    }
+    const Cal = (window as any).Cal;
+    Cal("init", "1-on-1-call-with-hussein", {origin:"https://app.cal.com"});
+
+    Cal.ns["1-on-1-call-with-hussein"]("inline", {
+      elementOrSelector:"#my-cal-inline-1-on-1-call-with-hussein",
+      config: {"layout":"month_view"},
+      calLink: "husseinsbeiti/1-on-1-call-with-hussein",
+    });
+
+    Cal.ns["1-on-1-call-with-hussein"]("ui", {"hideEventTypeDetails":true,"layout":"month_view"});
   }, [])
 
 
@@ -233,11 +266,11 @@ export default function ThankYou() {
                   Select Your Time
                 </h3>
                 
-                      {/* Calendly inline widget - clean, no extra boxes */}
+                      {/* Cal.com inline embed - clean, simple design */}
                       <div 
-                        className="calendly-inline-widget rounded-2xl overflow-hidden shadow-lg w-full" 
-                        data-url="https://calendly.com/hussein-sbeiti-wb/consultation?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=d6af4b"
-                        style={{ minHeight: '700px', height: '700px' }}
+                        id="my-cal-inline-1-on-1-call-with-hussein"
+                        className="rounded-2xl overflow-hidden shadow-lg w-full bg-white" 
+                        style={{ width: '100%', height: '700px', overflow: 'scroll' }}
                       ></div>
 
                 <p className="text-sm text-gray-500 text-center mt-6 italic">

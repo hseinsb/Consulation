@@ -26,16 +26,14 @@
   }
 }
 
-/* Calendly widget styling - clean, no extra boxes */
+/* Cal.com widget styling - clean design */
 @layer components {
-  .calendly-inline-widget {
+  #my-cal-inline-1-on-1-call-with-hussein {
     position: relative;
-    background: white;
   }
   
-  .calendly-inline-widget iframe {
+  #my-cal-inline-1-on-1-call-with-hussein iframe {
     border: none !important;
-    border-radius: 1rem;
   }
 }
 
