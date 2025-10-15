@@ -26,3 +26,13 @@
   }
 }
 
+/* Cal.com iframe optimization - prevent nested scrolling */
+@layer components {
+  [data-cal-namespace] iframe,
+  [data-cal-namespace] {
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 600px !important;
+  }
+}
+

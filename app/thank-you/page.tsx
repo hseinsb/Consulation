@@ -226,13 +226,13 @@ export default function ThankYou() {
                   Select Your Time
                 </h3>
                 
-                      {/* Cal.com embed container - mobile friendly with no height restriction */}
-                      <div className="rounded-xl border border-gold-light/30 mb-6 w-full" style={{ minHeight: '500px' }}>
+                      {/* Cal.com embed container - no scroll restrictions, flows naturally */}
+                      <div className="rounded-xl border border-gold-light/30 mb-6 w-full" style={{ minHeight: '600px', height: 'auto' }}>
                         <Cal
                           key={Date.now()} // Force refresh with cache-busting
                           namespace="1-on-1-call-with-hussein"
                           calLink="husseinsbeiti/1-on-1-call-with-hussein"
-                          style={{width:"100%",height:"100%",minHeight:"500px"}}
+                          style={{width:"100%",height:"auto",minHeight:"600px"}}
                           config={{"layout":"month_view","theme":"light"}}
                         />
                       </div>
