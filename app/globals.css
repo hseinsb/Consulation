@@ -26,13 +26,14 @@
   }
 }
 
-/* Cal.com iframe optimization - prevent nested scrolling */
+/* Calendly widget styling */
 @layer components {
-  [data-cal-namespace] iframe,
-  [data-cal-namespace] {
-    overflow: visible !important;
-    height: auto !important;
-    min-height: 600px !important;
+  .calendly-inline-widget {
+    position: relative;
+  }
+  
+  .calendly-inline-widget iframe {
+    border-radius: 0.75rem;
   }
 }
 

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import Cal, { getCalApi } from "@calcom/embed-react"
 import CloudBackground from '@/components/CloudBackground'
 
 export default function ThankYou() {
@@ -50,10 +49,18 @@ export default function ThankYou() {
   }, [showVideo])
 
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({"namespace":"1-on-1-call-with-hussein"});
-      cal("ui", {"theme":"light","hideEventTypeDetails":true,"layout":"month_view"});
-    })();
+    // Load Calendly widget script
+    const script = document.createElement('script')
+    script.src = 'https://assets.calendly.com/assets/external/widget.js'
+    script.async = true
+    document.body.appendChild(script)
+
+    return () => {
+      // Cleanup script on unmount
+      if (script.parentNode) {
+        script.parentNode.removeChild(script)
+      }
+    }
   }, [])
 
 
@@ -226,16 +233,12 @@ export default function ThankYou() {
                   Select Your Time
                 </h3>
                 
-                      {/* Cal.com embed container - no scroll restrictions, flows naturally */}
-                      <div className="rounded-xl border border-gold-light/30 mb-6 w-full" style={{ minHeight: '600px', height: 'auto' }}>
-                        <Cal
-                          key={Date.now()} // Force refresh with cache-busting
-                          namespace="1-on-1-call-with-hussein"
-                          calLink="husseinsbeiti/1-on-1-call-with-hussein"
-                          style={{width:"100%",height:"auto",minHeight:"600px"}}
-                          config={{"layout":"month_view","theme":"light"}}
-                        />
-                      </div>
+                      {/* Calendly inline widget - no scroll issues, clean payment flow */}
+                      <div 
+                        className="calendly-inline-widget rounded-xl border border-gold-light/30 mb-6 w-full" 
+                        data-url="https://calendly.com/hussein-sbeiti-wb/consultation?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=d6af4b"
+                        style={{ minHeight: '700px', height: '700px' }}
+                      ></div>
 
                 <p className="text-sm text-gray-500 text-center mt-4 italic">
                   This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.
