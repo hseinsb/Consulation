@@ -166,7 +166,7 @@ export default function ThankYou() {
         </div>
 
         {/* Section D - Booking Section */}
-        <div id="booking-section" className="scroll-mt-20 max-w-6xl mx-auto mb-16">
+        <div id="booking-section" className="scroll-mt-20 max-w-7xl mx-auto mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-3">
               What It Felt Like to Talk to Me One-on-One
@@ -176,8 +176,8 @@ export default function ThankYou() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft p-8 md:p-12 border border-gold-light/30">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft p-6 md:p-10 border border-gold-light/30">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-start">
               
               {/* Left side - Testimonial */}
               <div className="space-y-5">
@@ -221,13 +221,13 @@ export default function ThankYou() {
               </div>
 
               {/* Right side - Calendar */}
-              <div className="bg-white/80 rounded-2xl p-6 shadow-lg border border-gold-light/20">
+              <div className="bg-white/80 rounded-2xl p-4 md:p-6 shadow-lg border border-gold-light/20 w-full">
                 <h3 className="text-2xl font-medium text-gray-900 mb-6 text-center">
                   Select Your Time
                 </h3>
                 
                       {/* Cal.com embed container - mobile friendly with no height restriction */}
-                      <div className="rounded-xl border border-gold-light/30 mb-6" style={{ width: '100%', minHeight: '500px' }}>
+                      <div className="rounded-xl border border-gold-light/30 mb-6 w-full" style={{ minHeight: '500px' }}>
                         <Cal
                           key={Date.now()} // Force refresh with cache-busting
                           namespace="1-on-1-call-with-hussein"
