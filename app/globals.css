@@ -26,14 +26,16 @@
   }
 }
 
-/* Calendly widget styling */
+/* Calendly widget styling - clean, no extra boxes */
 @layer components {
   .calendly-inline-widget {
     position: relative;
+    background: white;
   }
   
   .calendly-inline-widget iframe {
-    border-radius: 0.75rem;
+    border: none !important;
+    border-radius: 1rem;
   }
 }
 

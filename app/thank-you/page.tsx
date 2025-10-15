@@ -228,19 +228,19 @@ export default function ThankYou() {
               </div>
 
               {/* Right side - Calendar */}
-              <div className="bg-white/80 rounded-2xl p-4 md:p-6 shadow-lg border border-gold-light/20 w-full">
+              <div className="w-full">
                 <h3 className="text-2xl font-medium text-gray-900 mb-6 text-center">
                   Select Your Time
                 </h3>
                 
-                      {/* Calendly inline widget - no scroll issues, clean payment flow */}
+                      {/* Calendly inline widget - clean, no extra boxes */}
                       <div 
-                        className="calendly-inline-widget rounded-xl border border-gold-light/30 mb-6 w-full" 
+                        className="calendly-inline-widget rounded-2xl overflow-hidden shadow-lg w-full" 
                         data-url="https://calendly.com/hussein-sbeiti-wb/consultation?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=d6af4b"
                         style={{ minHeight: '700px', height: '700px' }}
                       ></div>
 
-                <p className="text-sm text-gray-500 text-center mt-4 italic">
+                <p className="text-sm text-gray-500 text-center mt-6 italic">
                   This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.
                 </p>
               </div>
