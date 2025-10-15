@@ -266,11 +266,11 @@ export default function ThankYou() {
                   Select Your Time
                 </h3>
                 
-                      {/* Cal.com inline embed - clean, simple design */}
+                      {/* Cal.com inline embed - mobile friendly, no scroll restrictions */}
                       <div 
                         id="my-cal-inline-1-on-1-call-with-hussein"
-                        className="rounded-2xl overflow-hidden shadow-lg w-full bg-white" 
-                        style={{ width: '100%', height: '700px', overflow: 'scroll' }}
+                        className="rounded-2xl shadow-lg w-full bg-white" 
+                        style={{ width: '100%', minHeight: '700px' }}
                       ></div>
 
                 <p className="text-sm text-gray-500 text-center mt-6 italic">

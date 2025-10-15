@@ -26,14 +26,17 @@
   }
 }
 
-/* Cal.com widget styling - clean design */
+/* Cal.com widget styling - mobile friendly, no scroll issues */
 @layer components {
   #my-cal-inline-1-on-1-call-with-hussein {
     position: relative;
+    overflow: visible !important;
   }
   
   #my-cal-inline-1-on-1-call-with-hussein iframe {
     border: none !important;
+    overflow: visible !important;
+    min-height: 700px !important;
   }
 }
 
