@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { google } from 'googleapis'
 
+// Mark this route as dynamic (cannot be prerendered)
+export const dynamic = 'force-dynamic'
+
 // Initialize Google Calendar API
 const getCalendarClient = () => {
   const auth = new google.auth.JWT({

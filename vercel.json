@@ -1,0 +1,9 @@
+{
+  "name": "divine-consultation",
+  "version": 2,
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "framework": "nextjs"
+}
+

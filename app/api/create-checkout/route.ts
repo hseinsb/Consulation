@@ -27,6 +27,9 @@ export async function POST(request: NextRequest) {
 
     const price = parseInt(process.env.CONSULTATION_PRICE || '4900')
 
+    // Get the base URL - use env var if set, otherwise use request origin
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || request.nextUrl.origin
+
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -45,8 +48,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/booking-confirmation?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/thank-you?canceled=true`,
+      success_url: `${baseUrl}/booking-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/thank-you?canceled=true`,
       metadata: {
         startTime,
         endTime,
