@@ -12,11 +12,28 @@ export default function BookingConfirmation() {
     const sessionId = urlParams.get('session_id')
     
     if (sessionId) {
-      // In production, you could fetch full booking details from your backend
-      setBookingDetails({
-        id: sessionId.substring(0, 16) + '...', // Truncate for display
-        confirmed: true
-      })
+      // Fetch booking details from Stripe session
+      fetch(`/api/booking-details?session_id=${sessionId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            setBookingDetails(data.booking)
+          } else {
+            // Fallback if API fails
+            setBookingDetails({
+              id: sessionId.substring(0, 16) + '...',
+              confirmed: true
+            })
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching booking details:', error)
+          // Fallback
+          setBookingDetails({
+            id: sessionId.substring(0, 16) + '...',
+            confirmed: true
+          })
+        })
     }
   }, [])
 
@@ -38,7 +55,7 @@ export default function BookingConfirmation() {
         {/* Main Message */}
         <div className="mb-12 space-y-6">
           <h1 className="text-4xl md:text-6xl font-light tracking-wide text-gray-900 leading-tight text-shadow-soft">
-            Thank You for Booking
+            {bookingDetails?.customerName ? `Thank You, ${bookingDetails.customerName.split(' ')[0]}!` : 'Thank You for Booking'}
           </h1>
           <p className="text-xl md:text-2xl font-light text-gray-700 mb-4">
             Your consultation call has been confirmed.
