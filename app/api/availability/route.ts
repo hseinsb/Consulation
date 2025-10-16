@@ -131,8 +131,7 @@ export async function GET(request: NextRequest) {
             display: slotStart.toLocaleTimeString('en-US', { 
               hour: 'numeric', 
               minute: '2-digit',
-              hour12: true,
-              timeZone: timezone
+              hour12: true 
             })
           })
         }
