@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import CloudBackground from '@/components/CloudBackground'
-import BookingCalendar from '@/components/BookingCalendar'
 
 export default function ThankYou() {
   const [showVideo, setShowVideo] = useState(false)
@@ -13,6 +12,59 @@ export default function ThankYou() {
     // Fade in video after component mounts
     const timer = setTimeout(() => setShowVideo(true), 300)
     return () => clearTimeout(timer)
+  }, [])
+
+  // Initialize Cal.com embed
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.innerHTML = `
+      (function (C, A, L) { 
+        let p = function (a, ar) { a.q.push(ar); }; 
+        let d = C.document; 
+        C.Cal = C.Cal || function () { 
+          let cal = C.Cal; 
+          let ar = arguments; 
+          if (!cal.loaded) { 
+            cal.ns = {}; 
+            cal.q = cal.q || []; 
+            d.head.appendChild(d.createElement("script")).src = A; 
+            cal.loaded = true; 
+          } 
+          if (ar[0] === L) { 
+            const api = function () { p(api, arguments); }; 
+            const namespace = ar[1]; 
+            api.q = api.q || []; 
+            if(typeof namespace === "string"){
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar); 
+            return;
+          } 
+          p(cal, ar); 
+        }; 
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+      
+      Cal("init", "1-on-1-call-with-hussein", {origin:"https://app.cal.com"});
+      
+      Cal.ns["1-on-1-call-with-hussein"]("inline", {
+        elementOrSelector:"#my-cal-inline-1-on-1-call-with-hussein",
+        config: {"layout":"month_view"},
+        calLink: "husseinsbeiti/1-on-1-call-with-hussein",
+      });
+      
+      Cal.ns["1-on-1-call-with-hussein"]("ui", {
+        "hideEventTypeDetails":true,
+        "layout":"month_view"
+      });
+    `
+    document.body.appendChild(script)
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script)
+      }
+    }
   }, [])
 
   const handlePlayClick = async () => {
@@ -211,13 +263,22 @@ export default function ThankYou() {
           </div>
         </div>
 
-        {/* Section E - Custom Booking Calendar */}
+        {/* Section E - Cal.com Booking Calendar */}
         <div className="max-w-6xl mx-auto mb-16 px-4">
           <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-8 text-center">
             Book Your Consultation
           </h3>
           
-          <BookingCalendar />
+          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft border border-gold-light/30 overflow-hidden">
+            <div 
+              style={{
+                width: '100%',
+                minHeight: '600px',
+                overflow: 'visible'
+              }} 
+              id="my-cal-inline-1-on-1-call-with-hussein"
+            />
+          </div>
 
           <p className="text-sm text-gray-500 text-center mt-8 italic max-w-2xl mx-auto">
             This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.
