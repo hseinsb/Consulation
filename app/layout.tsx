@@ -39,6 +39,7 @@ export default function RootLayout({
             gtag('config', 'G-16L2TSP4ZL');
           `}
         </Script>
+        
         {children}
       </body>
     </html>

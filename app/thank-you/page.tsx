@@ -2,13 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import CloudBackground from '@/components/CloudBackground'
-
-// Declare Cal on window for TypeScript
-declare global {
-  interface Window {
-    Cal: any;
-  }
-}
+import BookingCalendar from '@/components/BookingCalendar'
 
 export default function ThankYou() {
   const [showVideo, setShowVideo] = useState(false)
@@ -55,46 +49,6 @@ export default function ThankYou() {
     }
   }, [showVideo])
 
-  useEffect(() => {
-    // Load Cal.com embed script
-    (function (C: any, A: string, L: string) { 
-      let p = function (a: any, ar: any) { a.q.push(ar); }; 
-      let d = C.document; 
-      C.Cal = C.Cal || function () { 
-        let cal = C.Cal; 
-        let ar = arguments; 
-        if (!cal.loaded) { 
-          cal.ns = {}; 
-          cal.q = cal.q || []; 
-          d.head.appendChild(d.createElement("script")).src = A; 
-          cal.loaded = true; 
-        } 
-        if (ar[0] === L) { 
-          const api: any = function () { p(api, arguments); }; 
-          const namespace = ar[1]; 
-          api.q = api.q || []; 
-          if(typeof namespace === "string"){
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ["initNamespace", namespace]);
-          } else p(cal, ar); 
-          return;
-        } 
-        p(cal, ar); 
-      }; 
-    })(window, "https://app.cal.com/embed/embed.js", "init");
-
-    const Cal = (window as any).Cal;
-    Cal("init", "1-on-1-call-with-hussein", {origin:"https://app.cal.com"});
-
-    Cal.ns["1-on-1-call-with-hussein"]("inline", {
-      elementOrSelector:"#my-cal-inline-1-on-1-call-with-hussein",
-      config: {"layout":"month_view"},
-      calLink: "husseinsbeiti/1-on-1-call-with-hussein",
-    });
-
-    Cal.ns["1-on-1-call-with-hussein"]("ui", {"hideEventTypeDetails":true,"layout":"month_view"});
-  }, [])
 
 
   const scrollToBooking = () => {
@@ -257,23 +211,13 @@ export default function ThankYou() {
           </div>
         </div>
 
-        {/* Section E - Calendar Section (Separate, Full Width) */}
+        {/* Section E - Custom Booking Calendar */}
         <div className="max-w-6xl mx-auto mb-16 px-4">
           <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-8 text-center">
-            Select Your Time
+            Book Your Consultation
           </h3>
           
-          {/* Cal.com inline embed - minimal styling, let Cal.com handle design */}
-          <div 
-            id="my-cal-inline-1-on-1-call-with-hussein"
-            className="w-full mx-auto" 
-            style={{ 
-              width: '100%', 
-              maxWidth: '1100px',
-              minHeight: '700px', 
-              height: 'auto'
-            }}
-          ></div>
+          <BookingCalendar />
 
           <p className="text-sm text-gray-500 text-center mt-8 italic max-w-2xl mx-auto">
             This is a sacred space. No group calls, no quick fixes — just you, me, and the truth.

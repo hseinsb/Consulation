@@ -7,22 +7,15 @@ export default function BookingConfirmation() {
   const [bookingDetails, setBookingDetails] = useState<any>(null)
 
   useEffect(() => {
-    // In a real implementation, you would get booking details from:
-    // - URL parameters
-    // - Local storage
-    // - API call to your backend
-    // For now, we'll show a generic confirmation
-    
-    // Example: Get booking details from URL params or storage
+    // Get Stripe session ID from URL
     const urlParams = new URLSearchParams(window.location.search)
-    const bookingId = urlParams.get('booking_id')
+    const sessionId = urlParams.get('session_id')
     
-    if (bookingId) {
-      // You would fetch booking details from your backend here
+    if (sessionId) {
+      // In production, you could fetch full booking details from your backend
       setBookingDetails({
-        id: bookingId,
-        date: 'Your consultation date',
-        time: 'Your consultation time'
+        id: sessionId.substring(0, 16) + '...', // Truncate for display
+        confirmed: true
       })
     }
   }, [])

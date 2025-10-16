@@ -26,42 +26,49 @@
   }
 }
 
-/* Cal.com widget styling - mobile friendly, no scroll issues */
+/* Calendly widget styling - smooth loading animation */
 @layer components {
-  #my-cal-inline-1-on-1-call-with-hussein {
+  .calendly-inline-widget {
     position: relative;
-    overflow: visible !important;
-    height: auto !important;
-    background: transparent !important;
+    background: linear-gradient(90deg, #f5f5f5 25%, #fafafa 50%, #f5f5f5 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 1rem;
+    transition: all 0.4s ease-in-out;
   }
-  
-  #my-cal-inline-1-on-1-call-with-hussein iframe {
+
+  /* When Calendly loads, fade out the shimmer and show the iframe */
+  .calendly-inline-widget:has(iframe) {
+    background: white;
+    animation: none;
+  }
+
+  .calendly-inline-widget iframe {
     border: none !important;
-    overflow: visible !important;
-    min-height: 700px !important;
-    height: auto !important;
+    border-radius: 1rem;
     width: 100% !important;
-    display: block !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out 0.2s forwards;
   }
 
-  /* Ensure Cal.com modals and booking forms are not restricted */
-  #my-cal-inline-1-on-1-call-with-hussein * {
-    overflow: visible !important;
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 
-  /* Force booking form container to expand */
-  [data-testid="booking-form"],
-  [data-cal-namespace] [role="dialog"],
-  [data-cal-namespace] form {
-    overflow: visible !important;
-    max-height: none !important;
-    height: auto !important;
-  }
-
-  /* Desktop-specific fixes - remove extra padding/margins inside Cal.com */
-  @media (min-width: 768px) {
-    #my-cal-inline-1-on-1-call-with-hussein iframe {
-      min-height: 800px !important;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 }
