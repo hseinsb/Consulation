@@ -169,20 +169,14 @@ This is a sacred space for spiritual guidance and emotional healing.
           reminders: {
             useDefault: true, // Use default reminders for your calendar
           },
-          conferenceData: {
-            createRequest: {
-              requestId: session.id,
-              conferenceSolutionKey: { type: 'hangoutsMeet' }, // Creates Google Meet link
-            },
-          },
+          // Note: Google Meet link will need to be added manually or via your personal calendar
         },
-        conferenceDataVersion: 1,
       })
 
       console.log('✅ Calendar event created:', event.data.id)
       console.log('📧 Client email for reference:', customerEmail)
       console.log('📅 Appointment:', displayTime)
-      console.log('🔗 Google Meet link:', event.data.hangoutLink || 'Check calendar event')
+      console.log('📝 Note: Add Google Meet link manually from your calendar')
 
       // Note: Client will need to be manually emailed or you can send them the Google Meet link
       // The calendar event contains all their information in the description
@@ -196,7 +190,7 @@ This is a sacred space for spiritual guidance and emotional healing.
             clientEmail: customerEmail,
             appointmentTime: displayTime,
             amount: (session.amount_total! / 100).toFixed(2),
-            meetLink: event.data.hangoutLink || 'Check your Google Calendar for the Meet link',
+            meetLink: 'Add from your Google Calendar event',
           })
           console.log('✅ Notification email sent to host')
         } catch (emailError: any) {
