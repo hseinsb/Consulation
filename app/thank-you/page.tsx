@@ -269,12 +269,11 @@ export default function ThankYou() {
             Book Your Consultation
           </h3>
           
-          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft border border-gold-light/30 overflow-hidden">
+          <div className="bg-gradient-to-br from-white/95 to-gold-light/30 rounded-3xl shadow-2xl glow-gold-soft border border-gold-light/30 p-4">
             <div 
               style={{
                 width: '100%',
-                minHeight: '600px',
-                overflow: 'visible'
+                minHeight: '600px'
               }} 
               id="my-cal-inline-1-on-1-call-with-hussein"
             />
