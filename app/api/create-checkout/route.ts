@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-09-30.clover',
-})
+// Initialize Stripe only when needed (not at build time)
+const getStripe = () => {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is not set')
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-09-30.clover',
+  })
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,8 +35,17 @@ export async function POST(request: NextRequest) {
 
     // Get the base URL - use env var if set, otherwise use request origin
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || request.nextUrl.origin
+    
+    // Log for debugging
+    console.log('Stripe Checkout URLs:', {
+      baseUrl,
+      successUrl: `${baseUrl}/booking-confirmation`,
+      cancelUrl: `${baseUrl}/thank-you`,
+      envVarSet: !!process.env.NEXT_PUBLIC_SITE_URL
+    })
 
     // Create Stripe Checkout Session
+    const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
