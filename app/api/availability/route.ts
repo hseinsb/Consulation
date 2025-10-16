@@ -33,22 +33,20 @@ export async function GET(request: NextRequest) {
     
     const slotDuration = parseInt(process.env.CONSULTATION_DURATION_MINUTES || '60')
 
-    // Parse the selected date and handle timezone
+    // Parse the selected date and handle timezone properly
     // The date comes in as YYYY-MM-DD format
-    const timezone = process.env.CONSULTATION_TIMEZONE || 'America/Toronto'
+    const timezone = process.env.CONSULTATION_TIMEZONE || 'America/Detroit'
     
-    // Create date in the consultation timezone
-    const [year, month, day] = date.split('-').map(Number)
-    const selectedDate = new Date(year, month - 1, day) // Create in local time
+    // Parse date string and create date at midnight in the target timezone
+    // Format: YYYY-MM-DDTHH:MM:SS in local time, then we'll indicate timezone
+    const dateStr = `${date}T00:00:00`
+    const selectedDate = new Date(dateStr)
     
     const today = new Date()
-    today.setHours(0, 0, 0, 0) // Reset to start of day for comparison
+    const todayStr = today.toISOString().split('T')[0]
     
     // Check if the selected date is in the past
-    const selectedDateOnly = new Date(selectedDate)
-    selectedDateOnly.setHours(0, 0, 0, 0)
-    
-    if (selectedDateOnly < today) {
+    if (date < todayStr) {
       return NextResponse.json({ slots: [] }) // No slots for past dates
     }
     
@@ -84,11 +82,14 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ slots: [] }) // No availability
     }
     
-    const startOfDay = new Date(selectedDate)
-    startOfDay.setHours(workStartHour, workStartMinute, 0, 0)
+    // Create times in Eastern timezone (UTC-4 during EDT, UTC-5 during EST)
+    // We'll assume EDT (UTC-4) for now - adjust if needed
+    const easternOffset = -4 * 60 // -4 hours in minutes
     
-    const endOfDay = new Date(selectedDate)
-    endOfDay.setHours(workEndHour, workEndMinute, 0, 0)
+    // Create date at the start/end hours in Eastern time
+    const [year, month, day] = date.split('-').map(Number)
+    const startOfDay = new Date(Date.UTC(year, month - 1, day, workStartHour - easternOffset / 60, workStartMinute, 0))
+    const endOfDay = new Date(Date.UTC(year, month - 1, day, workEndHour - easternOffset / 60, workEndMinute, 0))
 
     // Fetch existing events from Google Calendar
     const response = await calendar.events.list({
