@@ -164,13 +164,10 @@ This is a sacred space for spiritual guidance and emotional healing.
             dateTime: endTime,
             timeZone: process.env.CONSULTATION_TIMEZONE || 'America/New_York',
           },
-          attendees: customerEmail ? [{ email: customerEmail }] : [],
+          // Removed attendees - service account cannot invite without Domain-Wide Delegation
+          // Client email is in the description for reference
           reminders: {
-            useDefault: false,
-            overrides: [
-              { method: 'email', minutes: 24 * 60 }, // 1 day before
-              { method: 'email', minutes: 60 }, // 1 hour before
-            ],
+            useDefault: true, // Use default reminders for your calendar
           },
           conferenceData: {
             createRequest: {
@@ -183,19 +180,23 @@ This is a sacred space for spiritual guidance and emotional healing.
       })
 
       console.log('✅ Calendar event created:', event.data.id)
-      console.log('📧 Calendar invitation sent to:', customerEmail)
+      console.log('📧 Client email for reference:', customerEmail)
       console.log('📅 Appointment:', displayTime)
+      console.log('🔗 Google Meet link:', event.data.hangoutLink || 'Check calendar event')
 
+      // Note: Client will need to be manually emailed or you can send them the Google Meet link
+      // The calendar event contains all their information in the description
+      
       // Send email notification to you about the new booking
-      if (process.env.NOTIFICATION_EMAIL) {
+      if (process.env.NOTIFICATION_EMAIL && customerEmail) {
         try {
           await sendBookingNotification({
             hostEmail: process.env.NOTIFICATION_EMAIL,
             clientName: customerName || 'Client',
-            clientEmail: customerEmail || 'No email provided',
+            clientEmail: customerEmail,
             appointmentTime: displayTime,
             amount: (session.amount_total! / 100).toFixed(2),
-            meetLink: event.data.hangoutLink || 'Will be generated',
+            meetLink: event.data.hangoutLink || 'Check your Google Calendar for the Meet link',
           })
           console.log('✅ Notification email sent to host')
         } catch (emailError: any) {
