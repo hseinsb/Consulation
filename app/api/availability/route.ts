@@ -31,18 +31,47 @@ export async function GET(request: NextRequest) {
 
     const calendar = getCalendarClient()
     
-    // Define working hours (9 AM to 5 PM)
-    const workStartHour = 9
-    const workEndHour = 17
     const slotDuration = parseInt(process.env.CONSULTATION_DURATION_MINUTES || '60')
 
     // Parse the selected date
     const selectedDate = new Date(date)
+    const dayOfWeek = selectedDate.getDay() // 0 = Sunday, 1 = Monday, etc.
+
+    // Define custom availability schedule
+    let workStartHour: number
+    let workEndHour: number
+    let workStartMinute = 0
+    let workEndMinute = 59
+
+    switch (dayOfWeek) {
+      case 1: // Monday
+      case 3: // Wednesday
+      case 5: // Friday
+        workStartHour = 19 // 7 PM
+        workEndHour = 23 // 11:59 PM
+        break
+      case 2: // Tuesday
+        workStartHour = 19 // 7 PM
+        workEndHour = 22 // 10 PM
+        break
+      case 4: // Thursday
+        workStartHour = 19 // 7 PM
+        workEndHour = 20 // 8 PM
+        break
+      case 0: // Sunday
+      case 6: // Saturday
+        workStartHour = 14 // 2 PM
+        workEndHour = 23 // 11:59 PM
+        break
+      default:
+        return NextResponse.json({ slots: [] }) // No availability
+    }
+    
     const startOfDay = new Date(selectedDate)
-    startOfDay.setHours(workStartHour, 0, 0, 0)
+    startOfDay.setHours(workStartHour, workStartMinute, 0, 0)
     
     const endOfDay = new Date(selectedDate)
-    endOfDay.setHours(workEndHour, 0, 0, 0)
+    endOfDay.setHours(workEndHour, workEndMinute, 0, 0)
 
     // Fetch existing events from Google Calendar
     const response = await calendar.events.list({

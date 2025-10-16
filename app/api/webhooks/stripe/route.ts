@@ -23,6 +23,73 @@ const getCalendarClient = () => {
   return google.calendar({ version: 'v3', auth })
 }
 
+// Send email notification about new booking
+async function sendBookingNotification(details: {
+  hostEmail: string
+  clientName: string
+  clientEmail: string
+  appointmentTime: string
+  amount: string
+  meetLink: string
+}) {
+  // Using Gmail API with the same service account
+  const auth = new google.auth.JWT({
+    email: process.env.GOOGLE_CLIENT_EMAIL,
+    key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    scopes: ['https://www.googleapis.com/auth/gmail.send'],
+  })
+
+  const gmail = google.gmail({ version: 'v1', auth })
+
+  const emailContent = `From: ${process.env.GOOGLE_CLIENT_EMAIL}
+To: ${details.hostEmail}
+Subject: 🌟 New Consultation Booking - ${details.clientName}
+Content-Type: text/html; charset=utf-8
+
+<html>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px;">
+      <h2 style="color: white; text-align: center;">✨ New Consultation Booked ✨</h2>
+    </div>
+    
+    <div style="max-width: 600px; margin: 20px auto; padding: 30px; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+      <h3 style="color: #667eea;">Booking Details</h3>
+      
+      <p><strong>Client Name:</strong> ${details.clientName}</p>
+      <p><strong>Client Email:</strong> ${details.clientEmail}</p>
+      <p><strong>Appointment Time:</strong> ${details.appointmentTime}</p>
+      <p><strong>Amount Paid:</strong> $${details.amount}</p>
+      
+      <div style="margin: 30px 0; padding: 20px; background: #f8f9fa; border-left: 4px solid #667eea; border-radius: 5px;">
+        <p style="margin: 0;"><strong>Google Meet Link:</strong></p>
+        <p style="margin: 5px 0 0 0;">${details.meetLink}</p>
+      </div>
+      
+      <p style="color: #666; font-style: italic; margin-top: 30px;">
+        The appointment has been added to your Google Calendar and a confirmation email has been sent to the client.
+      </p>
+    </div>
+    
+    <div style="max-width: 600px; margin: 20px auto; padding: 20px; text-align: center; color: #999; font-size: 12px;">
+      <p>Divine Consultation Booking System</p>
+    </div>
+  </body>
+</html>`
+
+  const encodedEmail = Buffer.from(emailContent)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
+
+  await gmail.users.messages.send({
+    userId: 'me',
+    requestBody: {
+      raw: encodedEmail,
+    },
+  })
+}
+
 export async function POST(request: NextRequest) {
   const body = await request.text()
   const signature = request.headers.get('stripe-signature')
@@ -116,8 +183,26 @@ This is a sacred space for spiritual guidance and emotional healing.
       })
 
       console.log('✅ Calendar event created:', event.data.id)
-      console.log('📧 Confirmation sent to:', customerEmail)
+      console.log('📧 Calendar invitation sent to:', customerEmail)
       console.log('📅 Appointment:', displayTime)
+
+      // Send email notification to you about the new booking
+      if (process.env.NOTIFICATION_EMAIL) {
+        try {
+          await sendBookingNotification({
+            hostEmail: process.env.NOTIFICATION_EMAIL,
+            clientName: customerName || 'Client',
+            clientEmail: customerEmail || 'No email provided',
+            appointmentTime: displayTime,
+            amount: (session.amount_total! / 100).toFixed(2),
+            meetLink: event.data.hangoutLink || 'Will be generated',
+          })
+          console.log('✅ Notification email sent to host')
+        } catch (emailError: any) {
+          console.error('⚠️ Failed to send notification email:', emailError.message)
+          // Don't fail the webhook if email fails
+        }
+      }
 
       return NextResponse.json({ 
         received: true, 
