@@ -33,8 +33,14 @@ export async function GET(request: NextRequest) {
     
     const slotDuration = parseInt(process.env.CONSULTATION_DURATION_MINUTES || '60')
 
-    // Parse the selected date
-    const selectedDate = new Date(date)
+    // Parse the selected date and handle timezone
+    // The date comes in as YYYY-MM-DD format
+    const timezone = process.env.CONSULTATION_TIMEZONE || 'America/Toronto'
+    
+    // Create date in the consultation timezone
+    const [year, month, day] = date.split('-').map(Number)
+    const selectedDate = new Date(year, month - 1, day) // Create in local time
+    
     const today = new Date()
     today.setHours(0, 0, 0, 0) // Reset to start of day for comparison
     
@@ -125,7 +131,8 @@ export async function GET(request: NextRequest) {
             display: slotStart.toLocaleTimeString('en-US', { 
               hour: 'numeric', 
               minute: '2-digit',
-              hour12: true 
+              hour12: true,
+              timeZone: timezone
             })
           })
         }
