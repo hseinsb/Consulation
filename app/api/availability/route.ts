@@ -35,6 +35,17 @@ export async function GET(request: NextRequest) {
 
     // Parse the selected date
     const selectedDate = new Date(date)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0) // Reset to start of day for comparison
+    
+    // Check if the selected date is in the past
+    const selectedDateOnly = new Date(selectedDate)
+    selectedDateOnly.setHours(0, 0, 0, 0)
+    
+    if (selectedDateOnly < today) {
+      return NextResponse.json({ slots: [] }) // No slots for past dates
+    }
+    
     const dayOfWeek = selectedDate.getDay() // 0 = Sunday, 1 = Monday, etc.
 
     // Define custom availability schedule
